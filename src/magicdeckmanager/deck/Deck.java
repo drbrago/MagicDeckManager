@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 import magicdeckmanager.card.Color;
+import magicdeckmanager.dataModel.card.CardDataModel;
 
 /**
  *
@@ -59,5 +60,13 @@ public class Deck {
                 color.add(c);
             }
         }
+    }
+
+    public List<CardDataModel> getCardTableData() {
+        ArrayList<CardDataModel> result = new ArrayList();
+        for (String cardName : main) {
+            result.add(new CardDataModel(cardName));
+        }
+        return result;
     }
 }

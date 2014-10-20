@@ -22,6 +22,11 @@
     <TableView fx:id="tableView" GridPane.columnIndex="0" 
                GridPane.rowIndex="1">
         <columns>
+            <TableColumn fx:id="nameColumn" text="Name" prefWidth="150" >
+                <cellValueFactory>
+                    <PropertyValueFactory property="name" />
+                </cellValueFactory>
+            </TableColumn>
         </columns>                
     </TableView>
 </GridPane>

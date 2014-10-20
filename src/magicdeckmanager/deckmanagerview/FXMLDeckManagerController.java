@@ -6,13 +6,15 @@
 package magicdeckmanager.deckmanagerview;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import magicdeckmanager.MagicDeckManagerPresenter;
-import magicdeckmanager.dataModel.deck.DeckDataModel;
+import magicdeckmanager.dataModel.card.CardDataModel;
 import magicdeckmanager.deck.Deck;
 
 /**
@@ -25,7 +27,7 @@ public class FXMLDeckManagerController implements Initializable {
     @FXML
     private Label deckNameLabel;
     @FXML
-    private TableView<DeckDataModel> tableView;
+    private TableView<CardDataModel> tableView;
     
     /**
      * Initialises the controller class.
@@ -36,6 +38,11 @@ public class FXMLDeckManagerController implements Initializable {
 
     public void initDeck(MagicDeckManagerPresenter aThis, Deck deck) {
         deckNameLabel.setText(deck.name);
+        List<CardDataModel> cardTableData = deck.getCardTableData();
+        ObservableList<CardDataModel> data = tableView.getItems();
+        for (CardDataModel deckData : cardTableData) {
+            data.add(deckData);
+        }
     }
     
 }
