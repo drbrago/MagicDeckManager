@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="53460" Quantity="2" Sideboard="false" Name="Elvish Mystic" />
+  <Cards CatID="53644" Quantity="2" Sideboard="false" Name="Invasive Species" />
+  <Cards CatID="53410" Quantity="2" Sideboard="false" Name="Roaring Primadox" />
+  <Cards CatID="53760" Quantity="2" Sideboard="false" Name="Living Totem" />
+  <Cards CatID="50196" Quantity="2" Sideboard="false" Name="Nylea's Disciple" />
+  <Cards CatID="53496" Quantity="3" Sideboard="false" Name="Void Snare" />
+  <Cards CatID="53412" Quantity="3" Sideboard="false" Name="Peel from Reality" />
+  <Cards CatID="53520" Quantity="3" Sideboard="false" Name="Coral Barrier" />
+  <Cards CatID="53598" Quantity="3" Sideboard="false" Name="Frost Lynx" />
+  <Cards CatID="53416" Quantity="1" Sideboard="false" Name="Into the Void" />
+  <Cards CatID="53552" Quantity="2" Sideboard="false" Name="Kapsho Kitefins" />
+  <Cards CatID="53482" Quantity="12" Sideboard="false" Name="Island" />
+  <Cards CatID="53478" Quantity="12" Sideboard="false" Name="Forest" />
+  <Cards CatID="53362" Quantity="2" Sideboard="false" Name="Titanic Growth" />
+  <Cards CatID="53456" Quantity="2" Sideboard="false" Name="Hunt the Weak" />
+  <Cards CatID="50358" Quantity="2" Sideboard="false" Name="Triton Tactics" />
+  <Cards CatID="50368" Quantity="2" Sideboard="false" Name="Horizon Chimera" />
+  <Cards CatID="53436" Quantity="2" Sideboard="false" Name="Shaman of Spring" />
+  <Cards CatID="52104" Quantity="1" Sideboard="false" Name="Dakra Mystic" />
+  <Cards CatID="53468" Quantity="3" Sideboard="true" Name="Naturalize" />
+  <Cards CatID="50598" Quantity="3" Sideboard="true" Name="Savage Surge" />
+  <Cards CatID="53770" Quantity="3" Sideboard="true" Name="Netcaster Spider" />
+  <Cards CatID="53276" Quantity="3" Sideboard="true" Name="Negate" />
+  <Cards CatID="53294" Quantity="3" Sideboard="true" Name="Divination" />
+</Deck>

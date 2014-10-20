@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="53774" Quantity="2" Sideboard="false" Name="Darksteel Citadel" />
+  <Cards CatID="53602" Quantity="2" Sideboard="false" Name="Ensoul Artifact" />
+  <Cards CatID="53316" Quantity="3" Sideboard="false" Name="Evolving Wilds" />
+  <Cards CatID="53284" Quantity="2" Sideboard="false" Name="Shrapnel Blast" />
+  <Cards CatID="53306" Quantity="3" Sideboard="false" Name="Ornithopter" />
+  <Cards CatID="50590" Quantity="2" Sideboard="false" Name="Spellheart Chimera" />
+  <Cards CatID="50456" Quantity="3" Sideboard="false" Name="Aqueous Form" />
+  <Cards CatID="53718" Quantity="2" Sideboard="false" Name="Inferno Fist" />
+  <Cards CatID="53470" Quantity="3" Sideboard="false" Name="Lightning Strike" />
+  <Cards CatID="50632" Quantity="3" Sideboard="false" Name="Titan's Strength" />
+  <Cards CatID="53382" Quantity="2" Sideboard="false" Name="Dissipate" />
+  <Cards CatID="53328" Quantity="1" Sideboard="false" Name="Jace's Ingenuity" />
+  <Cards CatID="53482" Quantity="8" Sideboard="false" Name="Island" />
+  <Cards CatID="53480" Quantity="8" Sideboard="false" Name="Mountain" />
+  <Cards CatID="53370" Quantity="3" Sideboard="false" Name="Mountain" />
+  <Cards CatID="53388" Quantity="3" Sideboard="false" Name="Borderland Marauder" />
+  <Cards CatID="53276" Quantity="2" Sideboard="false" Name="Negate" />
+  <Cards CatID="51994" Quantity="3" Sideboard="false" Name="Satyr Hoplite" />
+  <Cards CatID="53260" Quantity="2" Sideboard="false" Name="Wall of Fire" />
+  <Cards CatID="53258" Quantity="1" Sideboard="false" Name="Cone of Flame" />
+  <Cards CatID="50464" Quantity="2" Sideboard="false" Name="Fanatic of Mogis" />
+  <Cards CatID="53276" Quantity="1" Sideboard="true" Name="Negate" />
+  <Cards CatID="53404" Quantity="2" Sideboard="true" Name="Torch Fiend" />
+  <Cards CatID="50358" Quantity="2" Sideboard="true" Name="Triton Tactics" />
+  <Cards CatID="53294" Quantity="2" Sideboard="true" Name="Divination" />
+  <Cards CatID="53428" Quantity="2" Sideboard="true" Name="Encrust" />
+  <Cards CatID="53718" Quantity="1" Sideboard="true" Name="Inferno Fist" />
+  <Cards CatID="53496" Quantity="3" Sideboard="true" Name="Void Snare" />
+  <Cards CatID="51633" Quantity="2" Sideboard="true" Name="Scouring Sands" />
+</Deck>
