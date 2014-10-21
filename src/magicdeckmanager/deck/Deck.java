@@ -61,12 +61,4 @@ public class Deck {
             }
         }
     }
-
-    public List<CardDataModel> getCardTableData() {
-        ArrayList<CardDataModel> result = new ArrayList();
-        for (String cardName : main) {
-            result.add(new CardDataModel(cardName));
-        }
-        return result;
-    }
 }

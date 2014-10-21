@@ -10,7 +10,7 @@
 <?import javafx.collections.*?> 
 <?import magicdeckmanager.*?> 
 
-<GridPane alignment="CENTER" hgap="10.0" vgap="10.0"
+<GridPane alignment="CENTER" hgap="10.0" vgap="10.0" 
           xmlns:fx="http://javafx.com/fxml"
           fx:controller="magicdeckmanager.deckmanagerview.FXMLDeckManagerController">
     <padding>
@@ -25,6 +25,16 @@
             <TableColumn fx:id="nameColumn" text="Name" prefWidth="150" >
                 <cellValueFactory>
                     <PropertyValueFactory property="name" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="typeColumn" text="Type" prefWidth="150" >
+                <cellValueFactory>
+                    <PropertyValueFactory property="type" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="costColumn" text="Mana Cost" prefWidth="150" >
+                <cellValueFactory>
+                    <PropertyValueFactory property="cost" />
                 </cellValueFactory>
             </TableColumn>
         </columns>                

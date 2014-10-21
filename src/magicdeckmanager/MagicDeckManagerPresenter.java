@@ -7,12 +7,15 @@ package magicdeckmanager;
 
 import magicdeckmanager.deckselectview.FXMLDeckSelectController;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Stage;
 import magicdeckmanager.card.CardManager;
+import magicdeckmanager.dataModel.card.CardDataModel;
 import magicdeckmanager.deck.Deck;
 import magicdeckmanager.deck.DeckManager;
 import magicdeckmanager.deckmanagerview.FXMLDeckManagerController;
@@ -29,8 +32,10 @@ public class MagicDeckManagerPresenter {
     private final Scene scene;
     private final DeckManager deckManager;
     private final CardManager cardManager;
+    private final Stage stage;
 
-    MagicDeckManagerPresenter(Scene scene, DeckManager deckManager, CardManager cardManager) {
+    MagicDeckManagerPresenter(Stage stage, Scene scene, DeckManager deckManager, CardManager cardManager) {
+        this.stage = stage;
         this.scene = scene;
         this.deckManager = deckManager;
         this.cardManager = cardManager;
@@ -63,9 +68,14 @@ public class MagicDeckManagerPresenter {
                     getClass().getResource("deckmanagerview/FXMLDeckManagerView.fxml")
             );
             scene.setRoot((Parent) loader.load());
+            stage.setWidth(800);
+            stage.setHeight(600);
+            stage.setY(0);
+            stage.setX(0);
             FXMLDeckManagerController controller
                     = loader.<FXMLDeckManagerController>getController();
-            controller.initDeck(this, deck);
+            final List<CardDataModel> cardTableDataFromDeck = cardManager.getCardTableDataFromDeck(deck);
+            controller.initDeck(this, deck.name, cardTableDataFromDeck);
         } catch (IOException ex) {
             theLogger.log(Level.SEVERE, null, ex);
         }

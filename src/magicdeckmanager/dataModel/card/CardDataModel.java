@@ -13,13 +13,17 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class CardDataModel {
     private final SimpleStringProperty name = new SimpleStringProperty("");
+    private final SimpleStringProperty type = new SimpleStringProperty("");
+    private final SimpleStringProperty cost = new SimpleStringProperty("");
     
     public CardDataModel() {
-        this("");
+        this("", "", "");
     }
 
-    public CardDataModel(String name) {
+    public CardDataModel(String name, String type, String cost) {
         setName(name);
+        setType(type);
+        setCost(cost);
     }
     
     public String getName() {
@@ -28,5 +32,21 @@ public class CardDataModel {
 
     public void setName(String cardName) {
         name.set(cardName);
+    }
+    
+    public String getCost() {
+        return cost.get();
+    }
+
+    public void setCost(String cardCost) {
+        cost.set(cardCost);
+    }
+    
+    public String getType() {
+        return type.get();
+    }
+
+    public void setType(String cardType) {
+        type.set(cardType);
     }
 }

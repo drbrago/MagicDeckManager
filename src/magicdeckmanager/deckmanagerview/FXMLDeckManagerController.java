@@ -36,9 +36,8 @@ public class FXMLDeckManagerController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
     }    
 
-    public void initDeck(MagicDeckManagerPresenter aThis, Deck deck) {
-        deckNameLabel.setText(deck.name);
-        List<CardDataModel> cardTableData = deck.getCardTableData();
+    public void initDeck(MagicDeckManagerPresenter aThis, String deckName, List<CardDataModel> cardTableData) {
+        deckNameLabel.setText(deckName);
         ObservableList<CardDataModel> data = tableView.getItems();
         for (CardDataModel deckData : cardTableData) {
             data.add(deckData);

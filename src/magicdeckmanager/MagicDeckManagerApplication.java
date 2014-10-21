@@ -29,7 +29,7 @@ public class MagicDeckManagerApplication extends Application {
 
         Scene scene = new Scene(new GridPane());
 
-        presenter = new MagicDeckManagerPresenter(scene, deckManager, cardManager);
+        presenter = new MagicDeckManagerPresenter(stage, scene, deckManager, cardManager);
 
         stage.setTitle("Deck Manager");
         stage.setScene(scene);

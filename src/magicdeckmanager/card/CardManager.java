@@ -6,10 +6,15 @@
 package magicdeckmanager.card;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
+import static magicdeckmanager.MagicDeckManagerApplication.main;
+import magicdeckmanager.dataModel.card.CardDataModel;
+import magicdeckmanager.deck.Deck;
 import magicdeckmanager.json.JSONReader;
 import magicdeckmanager.rulesformats.PlayFormat;
 import org.json.JSONArray;
@@ -98,6 +103,16 @@ public class CardManager {
         }
 
         setStandardFormat(new PlayFormat(PlayFormat.STANDARD, standardSets, 60, 15));
+    }
+    
+    public List<CardDataModel> getCardTableDataFromDeck(Deck deck) {
+        ArrayList<CardDataModel> result = new ArrayList();
+        final List<String> main = deck.getMain();
+        for (String cardName : main) {
+            Card card = getCardFromName(cardName);
+            result.add(new CardDataModel(cardName, card.type, card.manaCostString));
+        }
+        return result;
     }
 
     public Card getCardFromName(String name) {
