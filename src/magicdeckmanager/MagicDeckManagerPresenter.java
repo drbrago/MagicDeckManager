@@ -13,6 +13,8 @@ import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 import magicdeckmanager.card.CardManager;
 import magicdeckmanager.dataModel.card.CardDataModel;
@@ -75,7 +77,8 @@ public class MagicDeckManagerPresenter {
             FXMLDeckManagerController controller
                     = loader.<FXMLDeckManagerController>getController();
             final List<CardDataModel> cardTableDataFromDeck = cardManager.getCardTableDataFromDeck(deck);
-            controller.initDeck(this, deck.name, cardTableDataFromDeck);
+            final XYChart.Series manaCostSeries = cardManager.getManaCostBarChartData(deck);
+            controller.initDeck(this, deck.name, cardTableDataFromDeck, manaCostSeries);
         } catch (IOException ex) {
             theLogger.log(Level.SEVERE, null, ex);
         }

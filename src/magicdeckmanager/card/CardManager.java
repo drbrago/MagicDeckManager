@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
+import javafx.scene.chart.XYChart;
 import static magicdeckmanager.MagicDeckManagerApplication.main;
 import magicdeckmanager.dataModel.card.CardDataModel;
 import magicdeckmanager.deck.Deck;
@@ -60,11 +61,10 @@ public class CardManager {
 
         while (keys.hasNext()) {
             String key = (String) keys.next();
-            if(key.equals("UNH") || key.equals("UGL"))
-            {
+            if (key.equals("UNH") || key.equals("UGL")) {
                 continue;
             }
-            
+
             JSONObject cardSetData = (JSONObject) cardData.get(key);
             if (cardSetData instanceof JSONObject) {
                 JSONArray cardsData = (JSONArray) cardSetData.get("cards");
@@ -104,13 +104,39 @@ public class CardManager {
 
         setStandardFormat(new PlayFormat(PlayFormat.STANDARD, standardSets, 60, 15));
     }
-    
+
     public List<CardDataModel> getCardTableDataFromDeck(Deck deck) {
         ArrayList<CardDataModel> result = new ArrayList();
         final List<String> main = deck.getMain();
         for (String cardName : main) {
             Card card = getCardFromName(cardName);
             result.add(new CardDataModel(cardName, card.type, card.manaCostString));
+        }
+        return result;
+    }
+
+    public XYChart.Series getManaCostBarChartData(Deck deck) {
+        XYChart.Series result = new XYChart.Series();
+        result.setName("Mana Cost");
+        Map<Integer, Integer> costQuantity = new HashMap<>();
+        final List<String> main = deck.getMain();
+        for (String cardName : main) {
+            Card card = getCardFromName(cardName);
+            if (!card.isLand()) {
+                Integer cmc = card.cmc;
+                Integer quantity = costQuantity.get(cmc);
+                if (quantity != null) {
+                    quantity++;
+                } else {
+                    quantity = 1;
+                }
+                costQuantity.put(cmc, quantity);
+            }
+        }
+        for (Map.Entry<Integer, Integer> entrySet : costQuantity.entrySet()) {
+            Integer key = entrySet.getKey();
+            Integer value = entrySet.getValue();
+            result.getData().add(new XYChart.Data("CC" + key.toString(), value));
         }
         return result;
     }

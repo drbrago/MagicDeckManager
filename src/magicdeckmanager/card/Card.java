@@ -43,6 +43,8 @@ public class Card {
 
     public static final String SUBTYPES_DATA_KEY = "subtypes";
 
+    public static final String TYPE_LAND = "Land";
+    
     private static Logger theLogger = Logger.getLogger(Card.class
             .getName());
 
@@ -163,5 +165,9 @@ public class Card {
     
     public EnumSet<Color> getColorSet() {
         return colorSet;
+    }
+
+    boolean isLand() {
+        return (type.contains(TYPE_LAND));
     }
 }
