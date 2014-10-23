@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="34622" Quantity="3" Sideboard="false" Name="Misty Rainforest" />
+  <Cards CatID="35521" Quantity="3" Sideboard="false" Name="Halimar Depths" />
+  <Cards CatID="22044" Quantity="2" Sideboard="false" Name="Oboro, Palace in the Clouds" />
+  <Cards CatID="24031" Quantity="4" Sideboard="false" Name="Simic Growth Chamber" />
+  <Cards CatID="21535" Quantity="2" Sideboard="false" Name="Azusa, Lost but Seeking" />
+  <Cards CatID="48966" Quantity="2" Sideboard="false" Name="Meloku the Clouded Mirror" />
+  <Cards CatID="22184" Quantity="4" Sideboard="false" Name="Oboro Breezecaller" />
+  <Cards CatID="34674" Quantity="2" Sideboard="false" Name="Rampaging Baloths" />
+  <Cards CatID="21473" Quantity="4" Sideboard="false" Name="Soratami Cloudskater" />
+  <Cards CatID="21551" Quantity="1" Sideboard="false" Name="Soratami Savant" />
+  <Cards CatID="21549" Quantity="1" Sideboard="false" Name="Soratami Rainshaper" />
+  <Cards CatID="34372" Quantity="4" Sideboard="false" Name="Windrider Eel" />
+  <Cards CatID="12335" Quantity="4" Sideboard="false" Name="Exploration" />
+  <Cards CatID="34556" Quantity="4" Sideboard="false" Name="Khalni Heart Expedition" />
+  <Cards CatID="52835" Quantity="4" Sideboard="false" Name="Gush" />
+  <Cards CatID="37350" Quantity="4" Sideboard="false" Name="Cultivate" />
+  <Cards CatID="53482" Quantity="6" Sideboard="false" Name="Island" />
+  <Cards CatID="53478" Quantity="6" Sideboard="false" Name="Forest" />
+</Deck>

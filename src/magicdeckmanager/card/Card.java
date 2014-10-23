@@ -150,24 +150,28 @@ public class Card {
 
     private void extractColorsFromManaCost(List<ManaPart> cost, EnumSet<Color> result) {
         for (ManaPart manaPart : cost) {
-            if (manaPart.getClass().equals(ManaPartColor.class)) {
+            if (manaPart instanceof ManaPartColor) {
                 ManaPartColor manaPartColor = (ManaPartColor) manaPart;
                 result.add(manaPartColor.color);
-            } else if (manaPart.getClass().equals(ManaPartPhyrexian.class)) {
+            } else if (manaPart instanceof ManaPartPhyrexian) {
                 ManaPartPhyrexian manaPartPhyrexian = (ManaPartPhyrexian) manaPart;
                 result.add(manaPartPhyrexian.color);
-            } else if (manaPart.getClass().equals(ManaPartSplit.class)) {
+            } else if (manaPart instanceof ManaPartSplit) {
                 ManaPartSplit manaPartSplit = (ManaPartSplit) manaPart;
                 extractColorsFromManaCost(manaPartSplit.splitManaParts, result);
             }
         }
     }
     
+    boolean isLand() {
+        return (type.contains(TYPE_LAND));
+    }
+    
     public EnumSet<Color> getColorSet() {
         return colorSet;
     }
-
-    boolean isLand() {
-        return (type.contains(TYPE_LAND));
+    
+    public ManaCost getManaCost() {
+        return manaCost;
     }
 }

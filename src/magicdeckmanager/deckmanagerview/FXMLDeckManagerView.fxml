@@ -19,8 +19,22 @@
     <Label fx:id="deckNameLabel" style="-fx-font: NORMAL 20 Tahoma;" text="Decks"                
            GridPane.columnIndex="0" GridPane.rowIndex="0">
     </Label>
+    <BarChart fx:id="manaBarChart" GridPane.columnIndex="0" GridPane.rowIndex="1" prefHeight="500" >
+        <xAxis>
+            <CategoryAxis label="Converted mana cost">
+                
+            </CategoryAxis>           
+        </xAxis>
+        <yAxis>
+            <NumberAxis label="Quantity" >
+                
+            </NumberAxis>
+        </yAxis>
+    </BarChart>
+    <PieChart fx:id="manaDistPieChart" GridPane.columnIndex="1" GridPane.rowIndex="1" >
+    </PieChart>
     <TableView fx:id="tableView" GridPane.columnIndex="0" 
-               GridPane.rowIndex="1">
+               GridPane.rowIndex="2">
         <columns>
             <TableColumn fx:id="nameColumn" text="Name" prefWidth="150" >
                 <cellValueFactory>
@@ -38,17 +52,5 @@
                 </cellValueFactory>
             </TableColumn>
         </columns>                
-    </TableView>
-    <BarChart fx:id="manaBarChart" GridPane.columnIndex="1" GridPane.rowIndex="1">
-        <xAxis>
-            <CategoryAxis label="Converted mana cost">
-                
-            </CategoryAxis>           
-        </xAxis>
-        <yAxis>
-            <NumberAxis label="Quantity" >
-                
-            </NumberAxis>
-        </yAxis>
-    </BarChart>
+    </TableView> 
 </GridPane>

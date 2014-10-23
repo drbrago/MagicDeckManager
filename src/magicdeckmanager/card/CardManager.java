@@ -12,8 +12,16 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
-import static magicdeckmanager.MagicDeckManagerApplication.main;
+import magicdeckmanager.card.mana.ManaCost;
+import magicdeckmanager.card.mana.ManaPart;
+import magicdeckmanager.card.mana.ManaPartColor;
+import magicdeckmanager.card.mana.ManaPartColorless;
+import magicdeckmanager.card.mana.ManaPartPhyrexian;
+import magicdeckmanager.card.mana.ManaPartSplit;
 import magicdeckmanager.dataModel.card.CardDataModel;
 import magicdeckmanager.deck.Deck;
 import magicdeckmanager.json.JSONReader;
@@ -139,6 +147,65 @@ public class CardManager {
             result.getData().add(new XYChart.Data("CC" + key.toString(), value));
         }
         return result;
+    }
+
+    public ObservableList<PieChart.Data> getManaDistPieChartData(Deck deck) {
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+        final List<String> main = deck.getMain();
+        Map<Color, Integer> colorDistribution = new HashMap<>();
+        Integer totalManaCost = 0;
+        for (String cardName : main) {
+            Card card = getCardFromName(cardName);
+            if (!card.isLand()) {
+                totalManaCost += card.cmc;
+                final ManaCost manaCost = card.getManaCost();
+                final List<ManaPart> cost = manaCost.getCost();
+                addManaPartsToColorDistribution(cost, colorDistribution);
+            }
+        }
+        for (Map.Entry<Color, Integer> entrySet : colorDistribution.entrySet()) {
+            Color key = entrySet.getKey();
+            Integer value = entrySet.getValue();
+            double percent = (value.doubleValue() / totalManaCost.doubleValue());
+            percent *= 100;
+            Integer percentInteger = (int)Math.round(percent);
+            final String percentString = key.toString() + " " + percentInteger.toString() + "%";
+            pieChartData.add(new PieChart.Data(percentString, value));
+        }
+        return pieChartData;
+    }
+
+    private void addManaPartsToColorDistribution(List<ManaPart> cost, Map<Color, Integer> colorDistribution) {
+        for (ManaPart manaPart : cost) {
+            if (manaPart instanceof ManaPartColor) {
+                ManaPartColor manaPartColor = (ManaPartColor) manaPart;
+                Integer quantity = colorDistribution.get(manaPartColor.color);
+                if (quantity == null) {
+                    quantity = 0;
+                }
+                quantity++;
+                colorDistribution.put(manaPartColor.color, quantity);
+            } else if (manaPart instanceof ManaPartPhyrexian) {
+                ManaPartPhyrexian manaPartPhyrexian = (ManaPartPhyrexian) manaPart;
+                Integer quantity = colorDistribution.get(manaPartPhyrexian.color);
+                if (quantity == null) {
+                    quantity = 0;
+                }
+                quantity++;
+                colorDistribution.put(manaPartPhyrexian.color, quantity);
+            } else if (manaPart instanceof ManaPartColorless) {
+                ManaPartColorless manaPartColorless = (ManaPartColorless) manaPart;
+                Integer quantity = colorDistribution.get(Color.Colorless);
+                if (quantity == null) {
+                    quantity = 0;
+                }
+                quantity += manaPartColorless.amount;
+                colorDistribution.put(Color.Colorless, quantity);
+            } else if (manaPart instanceof ManaPartSplit) {
+                ManaPartSplit manaPartSplit = (ManaPartSplit) manaPart;
+                addManaPartsToColorDistribution(manaPartSplit.splitManaParts, colorDistribution);
+            }
+        }
     }
 
     public Card getCardFromName(String name) {

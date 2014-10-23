@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.Axis;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
@@ -27,16 +28,18 @@ import magicdeckmanager.dataModel.card.CardDataModel;
  * @author drbra_000
  */
 public class FXMLDeckManagerController implements Initializable {
-    
+
     private static final Logger theLogger = Logger.getLogger(FXMLDeckManagerController.class
             .getName());
-    
+
     @FXML
     private Label deckNameLabel;
     @FXML
     private TableView<CardDataModel> tableView;
     @FXML
     private BarChart manaBarChart;
+    @FXML
+    private PieChart manaDistPieChart;
 
     /**
      * Initialises the controller class.
@@ -45,20 +48,24 @@ public class FXMLDeckManagerController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
     }
 
-    public void initDeck(MagicDeckManagerPresenter aThis, String deckName, List<CardDataModel> cardTableData, XYChart.Series manaCostSeries) {
+    public void initDeck(MagicDeckManagerPresenter aThis, String deckName, List<CardDataModel> cardTableData, XYChart.Series manaCostSeries, ObservableList<PieChart.Data> manaDistChartData) {
         deckNameLabel.setText(deckName);
         ObservableList<CardDataModel> data = tableView.getItems();
         for (CardDataModel deckData : cardTableData) {
-            
+
             data.add(deckData);
         }
+        populateManaCostBarChart(manaCostSeries);
+        populateManaDistPieChart(manaDistChartData);
+    }
+
+    private void populateManaCostBarChart(XYChart.Series manaCostSeries) {
         final ObservableList series = manaCostSeries.getData();
         Integer highestCost = 0;
         for (Object data1 : series) {
             XYChart.Data chartData = (XYChart.Data) data1;
             Integer yValue = (Integer) chartData.getYValue();
-            if(yValue > highestCost)
-            {
+            if (yValue > highestCost) {
                 highestCost = yValue;
             }
         }
@@ -68,6 +75,11 @@ public class FXMLDeckManagerController implements Initializable {
         numberAxis.setAutoRanging(false);
         numberAxis.setTickUnit(1);
         numberAxis.setUpperBound(highestCost);
+    }
+
+    private void populateManaDistPieChart(ObservableList<PieChart.Data> manaDistChartData) {
+        manaDistPieChart.setTitle("Mana Distribution");
+        manaDistPieChart.setData(manaDistChartData);
     }
 
 }

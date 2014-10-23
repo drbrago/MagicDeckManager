@@ -10,9 +10,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 import magicdeckmanager.card.CardManager;
@@ -70,14 +72,15 @@ public class MagicDeckManagerPresenter {
             );
             scene.setRoot((Parent) loader.load());
             stage.setWidth(1024);
-            stage.setHeight(768);
+            stage.setHeight(700);
             stage.setY(0);
             stage.setX(0);
             FXMLDeckManagerController controller
                     = loader.<FXMLDeckManagerController>getController();
             final List<CardDataModel> cardTableDataFromDeck = cardManager.getCardTableDataFromDeck(deck);
             final XYChart.Series manaCostSeries = cardManager.getManaCostBarChartData(deck);
-            controller.initDeck(this, deck.name, cardTableDataFromDeck, manaCostSeries);
+            final ObservableList<PieChart.Data> manaDistData = cardManager.getManaDistPieChartData(deck);
+            controller.initDeck(this, deck.name, cardTableDataFromDeck, manaCostSeries, manaDistData);
         } catch (IOException ex) {
             theLogger.log(Level.SEVERE, null, ex);
         }
