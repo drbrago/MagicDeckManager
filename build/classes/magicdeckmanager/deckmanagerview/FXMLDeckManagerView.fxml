@@ -46,7 +46,7 @@
             </CategoryAxis>           
         </xAxis>
         <yAxis>
-            <NumberAxis label="Quantity" tickUnit="1.0" >
+            <NumberAxis label="Quantity" >
                 
             </NumberAxis>
         </yAxis>

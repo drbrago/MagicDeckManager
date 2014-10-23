@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 import magicdeckmanager.card.Color;
-import magicdeckmanager.dataModel.card.CardDataModel;
 
 /**
  *

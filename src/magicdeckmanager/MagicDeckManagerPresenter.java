@@ -13,7 +13,6 @@ import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 import magicdeckmanager.card.CardManager;
@@ -70,8 +69,8 @@ public class MagicDeckManagerPresenter {
                     getClass().getResource("deckmanagerview/FXMLDeckManagerView.fxml")
             );
             scene.setRoot((Parent) loader.load());
-            stage.setWidth(800);
-            stage.setHeight(600);
+            stage.setWidth(1024);
+            stage.setHeight(768);
             stage.setY(0);
             stage.setX(0);
             FXMLDeckManagerController controller
@@ -83,6 +82,4 @@ public class MagicDeckManagerPresenter {
             theLogger.log(Level.SEVERE, null, ex);
         }
     }
-
-
 }

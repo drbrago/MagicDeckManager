@@ -8,12 +8,12 @@ package magicdeckmanager.deckmanagerview;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.Axis;
 import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
@@ -27,7 +27,10 @@ import magicdeckmanager.dataModel.card.CardDataModel;
  * @author drbra_000
  */
 public class FXMLDeckManagerController implements Initializable {
-
+    
+    private static final Logger theLogger = Logger.getLogger(FXMLDeckManagerController.class
+            .getName());
+    
     @FXML
     private Label deckNameLabel;
     @FXML
@@ -46,11 +49,25 @@ public class FXMLDeckManagerController implements Initializable {
         deckNameLabel.setText(deckName);
         ObservableList<CardDataModel> data = tableView.getItems();
         for (CardDataModel deckData : cardTableData) {
+            
             data.add(deckData);
         }
+        final ObservableList series = manaCostSeries.getData();
+        Integer highestCost = 0;
+        for (Object data1 : series) {
+            XYChart.Data chartData = (XYChart.Data) data1;
+            Integer yValue = (Integer) chartData.getYValue();
+            if(yValue > highestCost)
+            {
+                highestCost = yValue;
+            }
+        }
         manaBarChart.getData().add(manaCostSeries);
-        NumberAxis xAxis = (NumberAxis) manaBarChart.getXAxis();
-        xAxis.setTickUnit(1);
+        Axis yAxis = manaBarChart.getYAxis();
+        NumberAxis numberAxis = (NumberAxis) yAxis;
+        numberAxis.setAutoRanging(false);
+        numberAxis.setTickUnit(1);
+        numberAxis.setUpperBound(highestCost);
     }
 
 }
