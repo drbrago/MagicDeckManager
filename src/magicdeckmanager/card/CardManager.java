@@ -24,6 +24,7 @@ import magicdeckmanager.card.mana.ManaPartPhyrexian;
 import magicdeckmanager.card.mana.ManaPartSplit;
 import magicdeckmanager.dataModel.card.CardDataModel;
 import magicdeckmanager.deck.Deck;
+import magicdeckmanager.deck.DeckStatisticsData;
 import magicdeckmanager.json.JSONReader;
 import magicdeckmanager.rulesformats.PlayFormat;
 import org.json.JSONArray;
@@ -168,7 +169,7 @@ public class CardManager {
             Integer value = entrySet.getValue();
             double percent = (value.doubleValue() / totalManaCost.doubleValue());
             percent *= 100;
-            Integer percentInteger = (int)Math.round(percent);
+            Integer percentInteger = (int) Math.round(percent);
             final String percentString = key.toString() + " " + percentInteger.toString() + "%";
             pieChartData.add(new PieChart.Data(percentString, value));
         }
@@ -230,6 +231,14 @@ public class CardManager {
 
     public void setStandardFormat(PlayFormat standardFormat) {
         this.standardFormat = standardFormat;
+    }
+
+    public DeckStatisticsData getDeckStatistics(Deck deck) {
+        final List<CardDataModel> cardTableDataFromDeck = getCardTableDataFromDeck(deck);
+        final XYChart.Series manaCostSeries = getManaCostBarChartData(deck);
+        final ObservableList<PieChart.Data> manaDistData = getManaDistPieChartData(deck);
+        final DeckStatisticsData deckStats = new DeckStatisticsData(deck.name, cardTableDataFromDeck, manaCostSeries, manaDistData);
+        return deckStats;
     }
 
 }

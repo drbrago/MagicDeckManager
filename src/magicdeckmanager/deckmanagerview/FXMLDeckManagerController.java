@@ -21,6 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import magicdeckmanager.MagicDeckManagerPresenter;
 import magicdeckmanager.dataModel.card.CardDataModel;
+import magicdeckmanager.deck.DeckStatisticsData;
 
 /**
  * FXML Controller class
@@ -48,15 +49,16 @@ public class FXMLDeckManagerController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
     }
 
-    public void initDeck(MagicDeckManagerPresenter aThis, String deckName, List<CardDataModel> cardTableData, XYChart.Series manaCostSeries, ObservableList<PieChart.Data> manaDistChartData) {
-        deckNameLabel.setText(deckName);
+    public void initDeck(MagicDeckManagerPresenter aThis, DeckStatisticsData deckStats) {
+        deckNameLabel.setText(deckStats.getName());
         ObservableList<CardDataModel> data = tableView.getItems();
-        for (CardDataModel deckData : cardTableData) {
+        final List<CardDataModel> cardTable = deckStats.getCardTable();
+        for (CardDataModel deckData : cardTable) {
 
             data.add(deckData);
         }
-        populateManaCostBarChart(manaCostSeries);
-        populateManaDistPieChart(manaDistChartData);
+        populateManaCostBarChart(deckStats.getManaCostSeries());
+        populateManaDistPieChart(deckStats.getManaDistributionList());
     }
 
     private void populateManaCostBarChart(XYChart.Series manaCostSeries) {

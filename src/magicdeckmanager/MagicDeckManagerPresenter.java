@@ -21,6 +21,7 @@ import magicdeckmanager.card.CardManager;
 import magicdeckmanager.dataModel.card.CardDataModel;
 import magicdeckmanager.deck.Deck;
 import magicdeckmanager.deck.DeckManager;
+import magicdeckmanager.deck.DeckStatisticsData;
 import magicdeckmanager.deckmanagerview.FXMLDeckManagerController;
 
 /**
@@ -77,10 +78,8 @@ public class MagicDeckManagerPresenter {
             stage.setX(0);
             FXMLDeckManagerController controller
                     = loader.<FXMLDeckManagerController>getController();
-            final List<CardDataModel> cardTableDataFromDeck = cardManager.getCardTableDataFromDeck(deck);
-            final XYChart.Series manaCostSeries = cardManager.getManaCostBarChartData(deck);
-            final ObservableList<PieChart.Data> manaDistData = cardManager.getManaDistPieChartData(deck);
-            controller.initDeck(this, deck.name, cardTableDataFromDeck, manaCostSeries, manaDistData);
+            DeckStatisticsData deckStats = cardManager.getDeckStatistics(deck);
+            controller.initDeck(this, deckStats);
         } catch (IOException ex) {
             theLogger.log(Level.SEVERE, null, ex);
         }
