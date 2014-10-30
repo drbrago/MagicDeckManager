@@ -52,5 +52,25 @@
                 </cellValueFactory>
             </TableColumn>
         </columns>                
+    </TableView>
+    <TableView fx:id="probabilityTableView" GridPane.columnIndex="1" 
+               GridPane.rowIndex="2">
+        <columns>
+            <TableColumn text="Name" prefWidth="150" >
+                <cellValueFactory>
+                    <PropertyValueFactory property="name" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Quantity" prefWidth="150" >
+                <cellValueFactory>
+                    <PropertyValueFactory property="quantity" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Hand" prefWidth="150" >
+                <cellValueFactory>
+                    <PropertyValueFactory property="probability" />
+                </cellValueFactory>
+            </TableColumn>
+        </columns>                
     </TableView> 
 </GridPane>

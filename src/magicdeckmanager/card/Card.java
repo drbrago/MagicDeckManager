@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.logging.Logger;
 import magicdeckmanager.card.mana.ManaPart;
 import magicdeckmanager.card.mana.ManaPartColor;
-import magicdeckmanager.card.mana.ManaPartColorless;
 import magicdeckmanager.card.mana.ManaPartPhyrexian;
 import magicdeckmanager.card.mana.ManaPartSplit;
 import org.json.JSONArray;

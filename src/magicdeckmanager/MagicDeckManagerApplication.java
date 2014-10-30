@@ -11,6 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import magicdeckmanager.card.CardManager;
 import magicdeckmanager.deck.DeckManager;
+import magicdeckmanager.optimization.DeckOptimizationManager;
 
 /**
  *
@@ -20,16 +21,18 @@ public class MagicDeckManagerApplication extends Application {
 
     private DeckManager deckManager;
     private CardManager cardManager;
+    private DeckOptimizationManager deckOptimizationManager;
     private MagicDeckManagerPresenter presenter;
 
     @Override
     public void start(Stage stage) throws Exception {
         cardManager = new CardManager();
         deckManager = new DeckManager(cardManager);
+        deckOptimizationManager = new DeckOptimizationManager(cardManager);
 
         Scene scene = new Scene(new GridPane());
 
-        presenter = new MagicDeckManagerPresenter(stage, scene, deckManager, cardManager);
+        presenter = new MagicDeckManagerPresenter(stage, scene, deckManager, cardManager, deckOptimizationManager);
 
         stage.setTitle("Deck Manager");
         stage.setScene(scene);

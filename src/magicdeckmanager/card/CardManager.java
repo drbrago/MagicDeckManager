@@ -24,6 +24,7 @@ import magicdeckmanager.card.mana.ManaPartPhyrexian;
 import magicdeckmanager.card.mana.ManaPartSplit;
 import magicdeckmanager.dataModel.card.CardDataModel;
 import magicdeckmanager.deck.Deck;
+import magicdeckmanager.deck.DeckData;
 import magicdeckmanager.deck.DeckStatisticsData;
 import magicdeckmanager.json.JSONReader;
 import magicdeckmanager.rulesformats.PlayFormat;
@@ -89,7 +90,7 @@ public class CardManager {
         Card[] cards = new Card[length];
         for (int i = 0; i < length; i++) {
             JSONObject cardData = (JSONObject) cardsData.get(i);
-            Card card = new Card(cardData);
+            final Card card = new Card(cardData);
             cards[i] = card;
             allCards.put(card.name, card);
         }
@@ -114,9 +115,9 @@ public class CardManager {
         setStandardFormat(new PlayFormat(PlayFormat.STANDARD, standardSets, 60, 15));
     }
 
-    public List<CardDataModel> getCardTableDataFromDeck(Deck deck) {
+    public List<CardDataModel> getCardTableDataFromDeck(DeckData deckData) {
         ArrayList<CardDataModel> result = new ArrayList();
-        final List<String> main = deck.getMain();
+        final List<String> main = deckData.getMain();
         for (String cardName : main) {
             Card card = getCardFromName(cardName);
             result.add(new CardDataModel(cardName, card.type, card.manaCostString));
@@ -124,11 +125,11 @@ public class CardManager {
         return result;
     }
 
-    public XYChart.Series getManaCostBarChartData(Deck deck) {
+    public XYChart.Series getManaCostBarChartData(DeckData deckData) {
         XYChart.Series result = new XYChart.Series();
         result.setName("Mana Cost");
         Map<Integer, Integer> costQuantity = new HashMap<>();
-        final List<String> main = deck.getMain();
+        final List<String> main = deckData.getMain();
         for (String cardName : main) {
             Card card = getCardFromName(cardName);
             if (!card.isLand()) {
@@ -150,9 +151,9 @@ public class CardManager {
         return result;
     }
 
-    public ObservableList<PieChart.Data> getManaDistPieChartData(Deck deck) {
+    public ObservableList<PieChart.Data> getManaDistPieChartData(DeckData deckData) {
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
-        final List<String> main = deck.getMain();
+        final List<String> main = deckData.getMain();
         Map<Color, Integer> colorDistribution = new HashMap<>();
         Integer totalManaCost = 0;
         for (String cardName : main) {
@@ -208,6 +209,22 @@ public class CardManager {
             }
         }
     }
+    
+    public Deck createDeckFromDeckData(DeckData deckData) {
+        List<Card> main = new ArrayList<>();
+        List<Card> sideboard = new ArrayList<>();
+        final List<String> mainString = deckData.getMain();
+        final List<String> sideboardString = deckData.getSideboard();
+        for (String cardName : mainString) {
+            Card card = getCardFromName(cardName);
+            main.add(card);
+        }
+        for (String cardName : sideboardString) {
+            Card card = getCardFromName(cardName);
+            sideboard.add(card);
+        }
+        return new Deck(deckData, main, sideboard);
+    }
 
     public Card getCardFromName(String name) {
         return allCards.get(name);
@@ -233,11 +250,11 @@ public class CardManager {
         this.standardFormat = standardFormat;
     }
 
-    public DeckStatisticsData getDeckStatistics(Deck deck) {
-        final List<CardDataModel> cardTableDataFromDeck = getCardTableDataFromDeck(deck);
-        final XYChart.Series manaCostSeries = getManaCostBarChartData(deck);
-        final ObservableList<PieChart.Data> manaDistData = getManaDistPieChartData(deck);
-        final DeckStatisticsData deckStats = new DeckStatisticsData(deck.name, cardTableDataFromDeck, manaCostSeries, manaDistData);
+    public DeckStatisticsData getDeckStatistics(DeckData deckData) {
+        final List<CardDataModel> cardTableDataFromDeck = getCardTableDataFromDeck(deckData);
+        final XYChart.Series manaCostSeries = getManaCostBarChartData(deckData);
+        final ObservableList<PieChart.Data> manaDistData = getManaDistPieChartData(deckData);
+        final DeckStatisticsData deckStats = new DeckStatisticsData(deckData.name, cardTableDataFromDeck, manaCostSeries, manaDistData);
         return deckStats;
     }
 

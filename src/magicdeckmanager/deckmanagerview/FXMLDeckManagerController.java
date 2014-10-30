@@ -21,6 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import magicdeckmanager.MagicDeckManagerPresenter;
 import magicdeckmanager.dataModel.card.CardDataModel;
+import magicdeckmanager.dataModel.card.CardProbabilityDataModel;
 import magicdeckmanager.deck.DeckStatisticsData;
 
 /**
@@ -38,6 +39,8 @@ public class FXMLDeckManagerController implements Initializable {
     @FXML
     private TableView<CardDataModel> tableView;
     @FXML
+    private TableView<CardProbabilityDataModel> probabilityTableView;
+    @FXML
     private BarChart manaBarChart;
     @FXML
     private PieChart manaDistPieChart;
@@ -49,16 +52,21 @@ public class FXMLDeckManagerController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
     }
 
-    public void initDeck(MagicDeckManagerPresenter aThis, DeckStatisticsData deckStats) {
+    public void initDeck(MagicDeckManagerPresenter presenter, DeckStatisticsData deckStats, List<CardProbabilityDataModel> probabilityTableData) {
         deckNameLabel.setText(deckStats.getName());
+        populateCardTableView(deckStats);
+        populateManaCostBarChart(deckStats.getManaCostSeries());
+        populateManaDistPieChart(deckStats.getManaDistributionList());
+        populateCardProbabilityList(probabilityTableData);
+    }
+
+    private void populateCardTableView(DeckStatisticsData deckStats) {
         ObservableList<CardDataModel> data = tableView.getItems();
         final List<CardDataModel> cardTable = deckStats.getCardTable();
         for (CardDataModel deckData : cardTable) {
 
             data.add(deckData);
         }
-        populateManaCostBarChart(deckStats.getManaCostSeries());
-        populateManaDistPieChart(deckStats.getManaDistributionList());
     }
 
     private void populateManaCostBarChart(XYChart.Series manaCostSeries) {
@@ -82,6 +90,14 @@ public class FXMLDeckManagerController implements Initializable {
     private void populateManaDistPieChart(ObservableList<PieChart.Data> manaDistChartData) {
         manaDistPieChart.setTitle("Mana Distribution");
         manaDistPieChart.setData(manaDistChartData);
+    }
+
+    private void populateCardProbabilityList(List<CardProbabilityDataModel> probabilityTableData) {
+        ObservableList<CardProbabilityDataModel> data = probabilityTableView.getItems();
+        for (CardProbabilityDataModel deckData : probabilityTableData) {
+
+            data.add(deckData);
+        }
     }
 
 }

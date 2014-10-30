@@ -36,7 +36,7 @@ public class DeckManager {
     
     private static final String decksFolderPath = "./data/decks";
 
-    private List<Deck> decks;
+    private List<DeckData> decks;
     private CardManager cardManager;
 
     public DeckManager(CardManager cardManager) {
@@ -44,22 +44,22 @@ public class DeckManager {
         decks = loadDecks();
     }
     
-    private List<Deck> loadDecks() {
+    private List<DeckData> loadDecks() {
         theLogger.info("load decks from path: " + decksFolderPath);
-        List<Deck> result = new ArrayList<>();
+        List<DeckData> result = new ArrayList<>();
         final File folder = new File(decksFolderPath);
         for (final File fileEntry : folder.listFiles()) {
-            Deck deck = createDeckFromFile(fileEntry);
-            result.add(deck);
+            DeckData deckData = createDeckFromFile(fileEntry);
+            result.add(deckData);
         }
         return result;
     }
 
-    public Deck createDeckFromFile(File deckFile) {
+    public DeckData createDeckFromFile(File deckFile) {
         String deckName = deckFile.getName();
         //String[] split = deckName.split(".");
         //deckName = split[0];
-        Deck deck = new Deck(deckName);
+        DeckData deckData = new DeckData(deckName);
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         try {
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -82,7 +82,7 @@ public class DeckManager {
                     //Add cards color to deck color set.
                     Card card = cardManager.getCardFromName(name);
                     EnumSet<Color> color = card.getColorSet();
-                    deck.addColors(color);
+                    deckData.addColors(color);
                     
                     for (int j = 0; j < quantity; j++) {
                         if (inSideboard) {
@@ -94,33 +94,33 @@ public class DeckManager {
                 }
             }
 
-            deck.setMain(main);
-            deck.setSideboard(sideboard);
+            deckData.setMain(main);
+            deckData.setSideboard(sideboard);
         } catch (ParserConfigurationException | IOException | SAXException e) {
             theLogger.log(Level.SEVERE, null, e);
         }
 
-        return deck;
+        return deckData;
     }
     
-    public List<Deck> getDecks() {
+    public List<DeckData> getDecks() {
         return decks;
     }
 
-    public void setDecks(List<Deck> deck) {
-        this.decks = deck;
+    public void setDecks(List<DeckData> deckData) {
+        this.decks = deckData;
     }
 
     public List<DeckDataModel> getDeckTableData() {
         ArrayList<DeckDataModel> result = new ArrayList();
-        for (Deck deck : decks) {
-            DeckDataModel dataModel = new DeckDataModel(deck.name, deck.color);
+        for (DeckData deckData : decks) {
+            DeckDataModel dataModel = new DeckDataModel(deckData.name, deckData.color);
             result.add(dataModel);
         }
         return result;
     }
 
-    public Deck getDeckFromIndex(int selectedIndex) {
+    public DeckData getDeckFromIndex(int selectedIndex) {
         return decks.get(selectedIndex);
     }
 }

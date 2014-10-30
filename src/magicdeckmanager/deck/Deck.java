@@ -5,10 +5,8 @@
  */
 package magicdeckmanager.deck;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
 import java.util.List;
-import magicdeckmanager.card.Color;
+import magicdeckmanager.card.Card;
 
 /**
  *
@@ -16,48 +14,34 @@ import magicdeckmanager.card.Color;
  */
 public class Deck {
 
-    public String name;
-    public EnumSet<Color> color;
+    private DeckData deckData;
+    private List<Card> main;
+    private List<Card> sideboard;
 
-    private List<String> main;
-    private List<String> sideboard;
-
-    public Deck(String name) {
-        this.name = name;
-        main = new ArrayList<String>();
-        sideboard = new ArrayList<String>();
-        color = EnumSet.of(Color.Colorless);
-    }
-
-    public Deck(String name, List<String> main, List<String> sideboard) {
-        this.name = name;
+    public Deck(DeckData deckData, List<Card> main, List<Card> sideboard) {
+        this.deckData = deckData;
         this.main = main;
         this.sideboard = sideboard;
-        color = EnumSet.of(Color.Colorless);
+    }
+    
+    public DeckData getDeckData() {
+        return deckData;
     }
 
-    public List<String> getMain() {
+    public List<Card> getMain() {
         return main;
     }
 
-    public void setMain(List<String> main) {
+    public void setMain(List<Card> main) {
         this.main = main;
     }
 
-    public List<String> getSideboard() {
+    public List<Card> getSideboard() {
         return sideboard;
     }
 
-    public void setSideboard(List<String> sideboard) {
+    public void setSideboard(List<Card> sideboard) {
         this.sideboard = sideboard;
     }
 
-    public void addColors(EnumSet<Color> colorToAdd) {
-        for (Color c : colorToAdd) {
-            if(color.contains(c) == false)
-            {
-                color.add(c);
-            }
-        }
-    }
 }
