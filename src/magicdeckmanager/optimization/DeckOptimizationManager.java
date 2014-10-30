@@ -12,6 +12,7 @@ import magicdeckmanager.card.Card;
 import magicdeckmanager.card.CardManager;
 import magicdeckmanager.dataModel.card.CardProbabilityDataModel;
 import magicdeckmanager.deck.Deck;
+import magicdeckmanager.utils.NumberUtils;
 import magicdeckmanager.utils.ProbabilityUtils;
 
 /**
@@ -34,7 +35,8 @@ public class DeckOptimizationManager {
         for (Card card : main) {
             if (!calculatedCards.contains(card)) {
                 int quantity = Collections.frequency(main, card);
-                double probability = ProbabilityUtils.calculateProbabilityOfDrawingCard(1, 7, size, quantity);
+                double probability = ProbabilityUtils.probabilityDrawingAtLeastOneCard(7, size, quantity);
+                probability = NumberUtils.round(probability * 100, 1);
                 cardProbabilities.add(new CardProbabilityDataModel(card.name, quantity, probability));
                 calculatedCards.add(card);
             }
